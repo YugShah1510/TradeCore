@@ -1,0 +1,164 @@
+// Prisma schema for TradeCore - Virtual Stock Market Simulator
+// Compatible with Prisma ORM 6.x and PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrderSide {
+  BUY
+  SELL
+}
+
+enum OrderType {
+  LIMIT
+}
+
+enum OrderStatus {
+  OPEN
+  PARTIALLY_FILLED
+  FILLED
+  CANCELLED
+  REJECTED
+}
+
+model User {
+  id            String             @id @default(uuid())
+  name          String
+  email         String             @unique
+  password      String
+  role          String             @default("TRADER")
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  cashAccount   CashAccount?
+  orders        Order[]
+  boughtTrades  Trade[]            @relation("BuyerTrades")
+  soldTrades    Trade[]            @relation("SellerTrades")
+  holdings      PortfolioHolding[]
+  refreshTokens RefreshToken[]
+
+  @@map("users")
+}
+
+model CashAccount {
+  id               String   @id @default(uuid())
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  initialBalance   Decimal  @default(100000.00) @db.Decimal(14, 2)
+  availableBalance Decimal  @default(100000.00) @db.Decimal(14, 2)
+  reservedBalance  Decimal  @default(0.00) @db.Decimal(14, 2)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("cash_accounts")
+}
+
+model Stock {
+  id             String              @id @default(uuid())
+  symbol         String              @unique
+  companyName    String
+  currentPrice   Decimal             @db.Decimal(10, 2)
+  previousClose  Decimal             @db.Decimal(10, 2)
+  category       String              @default("Technology")
+  volume         Int                 @default(0)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  orders         Order[]
+  trades         Trade[]
+  holdings       PortfolioHolding[]
+  priceHistories StockPriceHistory[]
+
+  @@map("stocks")
+}
+
+model StockPriceHistory {
+  id         String   @id @default(uuid())
+  stockId    String
+  stock      Stock    @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  price      Decimal  @db.Decimal(10, 2)
+  recordedAt DateTime @default(now())
+
+  @@index([stockId, recordedAt])
+  @@map("stock_price_histories")
+}
+
+model Order {
+  id             String      @id @default(uuid())
+  userId         String
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stockId        String
+  stock          Stock       @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  side           OrderSide
+  orderType      OrderType   @default(LIMIT)
+  limitPrice     Decimal     @db.Decimal(10, 2)
+  quantity       Int
+  filledQuantity Int         @default(0)
+  status         OrderStatus @default(OPEN)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  buyTrades      Trade[]     @relation("BuyOrderTrades")
+  sellTrades     Trade[]     @relation("SellOrderTrades")
+
+  @@index([stockId, side, status, limitPrice, createdAt])
+  @@index([userId, status])
+  @@map("orders")
+}
+
+model Trade {
+  id             String   @id @default(uuid())
+  stockId        String
+  stock          Stock    @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  buyOrderId     String
+  buyOrder       Order    @relation("BuyOrderTrades", fields: [buyOrderId], references: [id], onDelete: Cascade)
+  sellOrderId    String
+  sellOrder      Order    @relation("SellOrderTrades", fields: [sellOrderId], references: [id], onDelete: Cascade)
+  buyerId        String
+  buyer          User     @relation("BuyerTrades", fields: [buyerId], references: [id], onDelete: Cascade)
+  sellerId       String
+  seller         User     @relation("SellerTrades", fields: [sellerId], references: [id], onDelete: Cascade)
+  executionPrice Decimal  @db.Decimal(10, 2)
+  quantity       Int
+  executedAt     DateTime @default(now())
+
+  @@index([stockId, executedAt])
+  @@index([buyerId])
+  @@index([sellerId])
+  @@map("trades")
+}
+
+model PortfolioHolding {
+  id                   String   @id @default(uuid())
+  userId               String
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stockId              String
+  stock                Stock    @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  quantity             Int      @default(0)
+  reservedQuantity     Int      @default(0)
+  averagePurchasePrice Decimal  @default(0.00) @db.Decimal(10, 2)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@unique([userId, stockId])
+  @@map("portfolio_holdings")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([token])
+  @@map("refresh_tokens")
+}
+
