@@ -1,0 +1,960 @@
+/* ==========================================================================
+   TradeCore Design System — Neumorphism (Soft UI) Aesthetic
+   Tactile Extrusions, Debossed Wells, and Sculpted Precision
+   Strict High-Agency Frontend Architecture via design-taste-frontend
+   ========================================================================== */
+
+:root {
+  /* Neumorphic Canvas & Material Planes */
+  --bg-main: #E6ECF5;
+  --neu-base: #E6ECF5;
+  --neu-base-light: #F0F4FA;
+  --neu-base-dark: #D8DFE9;
+
+  /* Extruded (Raised) Dual-Shadow Pairings */
+  --neu-raised-xs: 2px 2px 6px rgba(166, 180, 200, 0.5), -2px -2px 6px rgba(255, 255, 255, 0.9);
+  --neu-raised-sm: 4px 4px 10px rgba(166, 180, 200, 0.55), -4px -4px 10px rgba(255, 255, 255, 0.95);
+  --neu-raised: 8px 8px 18px rgba(166, 180, 200, 0.65), -8px -8px 18px rgba(255, 255, 255, 0.95);
+  --neu-raised-lg: 14px 14px 30px rgba(166, 180, 200, 0.7), -14px -14px 30px rgba(255, 255, 255, 1);
+  --neu-raised-pill: 5px 5px 12px rgba(166, 180, 200, 0.6), -5px -5px 12px rgba(255, 255, 255, 0.95);
+
+  /* Debossed (Sunken / Inset) Dual-Shadow Pairings */
+  --neu-inset-xs: inset 2px 2px 4px rgba(166, 180, 200, 0.5), inset -2px -2px 4px rgba(255, 255, 255, 0.9);
+  --neu-inset-sm: inset 3px 3px 6px rgba(166, 180, 200, 0.55), inset -3px -3px 6px rgba(255, 255, 255, 0.95);
+  --neu-inset: inset 5px 5px 10px rgba(166, 180, 200, 0.65), inset -5px -5px 10px rgba(255, 255, 255, 0.95);
+  --neu-inset-deep: inset 7px 7px 14px rgba(166, 180, 200, 0.7), inset -7px -7px 14px rgba(255, 255, 255, 1);
+
+  /* Financial Accents with Neumorphic Relief */
+  --primary-green: #059669;
+  --hover-green: #047857;
+  --secondary-green: #10B981;
+  --color-buy: #059669;
+  --color-sell: #E11D48;
+  --color-positive: #059669;
+  --color-negative: #E11D48;
+  --color-warning: #D97706;
+  --color-info: #2563EB;
+
+  --positive-bg: rgba(16, 185, 129, 0.12);
+  --light-mint: rgba(16, 185, 129, 0.14);
+  --light-red: rgba(225, 29, 72, 0.12);
+  --light-warning: rgba(217, 119, 6, 0.12);
+  --light-info: rgba(37, 99, 235, 0.12);
+
+  /* Typography & High-Contrast Readability */
+  --text-primary: #1E293B;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-light: #94A3B8;
+
+  --border-main: rgba(166, 180, 200, 0.35);
+  --border-light: rgba(255, 255, 255, 0.7);
+
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Sculpted Neumorphic Radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+
+  /* Viewport-wide Color Scheme & Scrollbars */
+  color-scheme: light dark;
+  --color-scrollbar-track: rgba(0, 0, 0, 0.05);
+  --color-scrollbar-thumb: rgba(166, 180, 200, 0.6);
+  scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
+}
+
+/* Color Scheme & Viewport-wide Theming */
+:root:has(> head > meta[name="color-scheme"][content="dark"]) {
+  color-scheme: dark;
+}
+:root:has(> head > meta[name="color-scheme"][content="light"]) {
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Dark Mode Neumorphic Tokens
+   Applied via CSS :has override, .dark class fallback, or system preference
+   ========================================================================== */
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]),
+:root.dark,
+html.dark {
+  /* Neumorphic Canvas & Material Planes */
+  --bg-main: #12151C;
+  --neu-base: #181D26;
+  --neu-base-light: #222834;
+  --neu-base-dark: #10131A;
+
+  /* Extruded (Raised) Dual-Shadow Pairings */
+  --neu-raised-xs: 2px 2px 5px rgba(0, 0, 0, 0.65), -2px -2px 5px rgba(255, 255, 255, 0.04);
+  --neu-raised-sm: 4px 4px 10px rgba(0, 0, 0, 0.72), -4px -4px 10px rgba(255, 255, 255, 0.05);
+  --neu-raised: 7px 7px 18px rgba(0, 0, 0, 0.8), -7px -7px 18px rgba(255, 255, 255, 0.05);
+  --neu-raised-lg: 12px 12px 28px rgba(0, 0, 0, 0.88), -12px -12px 28px rgba(255, 255, 255, 0.06);
+  --neu-raised-pill: 4px 4px 10px rgba(0, 0, 0, 0.72), -4px -4px 10px rgba(255, 255, 255, 0.05);
+
+  /* Debossed (Sunken / Inset) Dual-Shadow Pairings */
+  --neu-inset-xs: inset 2px 2px 4px rgba(0, 0, 0, 0.65), inset -2px -2px 4px rgba(255, 255, 255, 0.04);
+  --neu-inset-sm: inset 3px 3px 6px rgba(0, 0, 0, 0.72), inset -3px -3px 6px rgba(255, 255, 255, 0.04);
+  --neu-inset: inset 5px 5px 10px rgba(0, 0, 0, 0.78), inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+  --neu-inset-deep: inset 7px 7px 14px rgba(0, 0, 0, 0.88), inset -7px -7px 14px rgba(255, 255, 255, 0.05);
+
+  /* Typography & High-Contrast Readability */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-light: #475569;
+
+  --border-main: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.12);
+
+  --color-scrollbar-track: rgba(255, 255, 255, 0.04);
+  --color-scrollbar-thumb: rgba(255, 255, 255, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])):not(.light) {
+    --bg-main: #12151C;
+    --neu-base: #181D26;
+    --neu-base-light: #222834;
+    --neu-base-dark: #10131A;
+
+    --neu-raised-xs: 2px 2px 5px rgba(0, 0, 0, 0.65), -2px -2px 5px rgba(255, 255, 255, 0.04);
+    --neu-raised-sm: 4px 4px 10px rgba(0, 0, 0, 0.72), -4px -4px 10px rgba(255, 255, 255, 0.05);
+    --neu-raised: 7px 7px 18px rgba(0, 0, 0, 0.8), -7px -7px 18px rgba(255, 255, 255, 0.05);
+    --neu-raised-lg: 12px 12px 28px rgba(0, 0, 0, 0.88), -12px -12px 28px rgba(255, 255, 255, 0.06);
+    --neu-raised-pill: 4px 4px 10px rgba(0, 0, 0, 0.72), -4px -4px 10px rgba(255, 255, 255, 0.05);
+
+    --neu-inset-xs: inset 2px 2px 4px rgba(0, 0, 0, 0.65), inset -2px -2px 4px rgba(255, 255, 255, 0.04);
+    --neu-inset-sm: inset 3px 3px 6px rgba(0, 0, 0, 0.72), inset -3px -3px 6px rgba(255, 255, 255, 0.04);
+    --neu-inset: inset 5px 5px 10px rgba(0, 0, 0, 0.78), inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+    --neu-inset-deep: inset 7px 7px 14px rgba(0, 0, 0, 0.88), inset -7px -7px 14px rgba(255, 255, 255, 0.05);
+
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --text-light: #475569;
+
+    --border-main: rgba(255, 255, 255, 0.08);
+    --border-light: rgba(255, 255, 255, 0.12);
+
+    --color-scrollbar-track: rgba(255, 255, 255, 0.04);
+    --color-scrollbar-thumb: rgba(255, 255, 255, 0.22);
+  }
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--neu-base);
+  color: var(--text-primary);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  user-select: none;
+}
+
+/* ==========================================================================
+   Extruded Neumorphic Cards & Surfaces
+   ========================================================================== */
+
+.card {
+  background: var(--neu-base);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--neu-raised);
+  border: 1px solid var(--border-light);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: var(--neu-raised-lg);
+  border-color: var(--border-light);
+}
+
+/* Debossed (Sunken) Well / Sub-panel */
+.glass-panel {
+  background: var(--neu-base);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--neu-inset);
+  border: 1px solid var(--border-main);
+}
+
+/* Sculpted Stat Tile (Extruded Micro-Plaque) */
+.glass-stat-tile {
+  padding: 14px 18px;
+  background: var(--neu-base);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--neu-raised-sm);
+  border: 1px solid var(--border-light);
+  transition: all 0.18s ease;
+}
+
+.glass-stat-tile:hover {
+  box-shadow: var(--neu-raised);
+  transform: translateY(-1px);
+}
+
+/* Danger Zone Neumorphic Card */
+.glass-card-danger {
+  background: var(--neu-base);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--neu-raised), inset 0 0 0 1px rgba(225, 29, 72, 0.2);
+  border: 1px solid var(--border-main);
+}
+
+/* ==========================================================================
+   Neumorphic Segmented Controls & Tabs
+   ========================================================================== */
+
+.glass-segmented {
+  display: inline-flex;
+  background: var(--neu-base);
+  padding: 5px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--neu-inset-sm);
+  border: 1px solid var(--border-light);
+  gap: 4px;
+}
+
+.glass-segmented-full {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  box-shadow: var(--neu-inset);
+}
+
+.glass-segmented-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+}
+
+.glass-segmented-full .glass-segmented-btn {
+  border-radius: calc(var(--radius-sm) - 4px);
+  padding: 12px;
+  font-size: 15px;
+}
+
+.glass-segmented-btn:hover:not(.active):not(.active-buy):not(.active-sell) {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.glass-segmented-btn.active {
+  background: var(--neu-base);
+  color: var(--text-primary);
+  box-shadow: var(--neu-raised-sm);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.glass-segmented-btn.active-buy {
+  background: linear-gradient(145deg, #10B981, #059669);
+  color: #FFFFFF;
+  box-shadow: 4px 4px 10px rgba(5, 150, 105, 0.4), -3px -3px 8px rgba(255, 255, 255, 0.8), inset 1px 1px 1px rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-segmented-btn.active-sell {
+  background: linear-gradient(145deg, #F43F5E, #E11D48);
+  color: #FFFFFF;
+  box-shadow: 4px 4px 10px rgba(225, 29, 72, 0.4), -3px -3px 8px rgba(255, 255, 255, 0.8), inset 1px 1px 1px rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   Sculpted Neumorphic Capsule Pills
+   ========================================================================== */
+
+.glass-pill {
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: var(--neu-base);
+  color: var(--text-secondary);
+  box-shadow: var(--neu-raised-sm);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.glass-pill:hover {
+  color: var(--text-primary);
+  box-shadow: var(--neu-raised-pill);
+  transform: translateY(-1px);
+}
+
+.glass-pill:active {
+  box-shadow: var(--neu-inset-sm);
+  transform: translateY(1px);
+}
+
+.glass-pill.active {
+  background: linear-gradient(145deg, #10B981, #059669);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 4px 4px 12px rgba(5, 150, 105, 0.4), -3px -3px 8px rgba(255, 255, 255, 0.8), inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   Neumorphic Alert Banners
+   ========================================================================== */
+
+.glass-alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 20px;
+  background: var(--neu-base);
+  box-shadow: var(--neu-inset-sm);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-alert-success {
+  color: #065F46;
+  border-left: 4px solid var(--primary-green);
+}
+
+.glass-alert-danger {
+  color: #9F1239;
+  border-left: 4px solid var(--color-sell);
+}
+
+.glass-alert-info {
+  color: #1E40AF;
+  border-left: 4px solid var(--color-info);
+}
+
+.glass-alert-warning {
+  color: #92400E;
+  border-left: 4px solid var(--color-warning);
+}
+
+/* ==========================================================================
+   Neumorphic Switch Controls
+   ========================================================================== */
+
+.apple-toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--neu-base);
+  box-shadow: var(--neu-raised-sm);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.18s ease;
+}
+
+.apple-toggle-label:hover {
+  box-shadow: var(--neu-raised);
+}
+
+.apple-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.apple-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.apple-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--neu-base);
+  transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 26px;
+  box-shadow: var(--neu-inset);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.apple-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--neu-base);
+  transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px rgba(166, 180, 200, 0.7), -2px -2px 5px rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.apple-switch input:checked + .apple-slider {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+
+.apple-switch input:checked + .apple-slider:before {
+  transform: translateX(22px);
+  background: linear-gradient(145deg, #10B981, #059669);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   Neumorphic Metric Ribbon
+   ========================================================================== */
+
+.metric-ribbon {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  background: var(--neu-base);
+  border-radius: var(--radius-md);
+  box-shadow: var(--neu-raised);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+.metric-ribbon-item {
+  padding: 22px 26px;
+  border-right: 1px solid var(--border-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.18s ease;
+}
+
+.metric-ribbon-item:hover {
+  background: var(--neu-base-light);
+}
+
+.metric-ribbon-item:last-child {
+  border-right: none;
+}
+
+/* Page Headers */
+.page-header {
+  margin-bottom: 26px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   Tactile Neumorphic Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  position: relative;
+  user-select: none;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* Primary Neumorphic Emerald Button */
+.btn-primary {
+  background: linear-gradient(145deg, #10B981, #059669);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 5px 5px 14px rgba(5, 150, 105, 0.4), -4px -4px 10px rgba(255, 255, 255, 0.9), inset 1px 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(145deg, #059669, #047857);
+  box-shadow: 6px 6px 16px rgba(5, 150, 105, 0.45), -5px -5px 12px rgba(255, 255, 255, 1);
+}
+
+.btn-primary:active:not(:disabled) {
+  box-shadow: inset 3px 3px 6px rgba(4, 120, 87, 0.7), inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Secondary Extruded Neumorphic Button */
+.btn-secondary {
+  background: var(--neu-base);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--neu-raised-sm);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  box-shadow: var(--neu-raised-pill);
+  color: var(--primary-green);
+}
+
+.btn-secondary:active:not(:disabled) {
+  box-shadow: var(--neu-inset-sm);
+}
+
+/* Danger Neumorphic Button */
+.btn-danger {
+  background: linear-gradient(145deg, #F43F5E, #E11D48);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 5px 5px 14px rgba(225, 29, 72, 0.38), -4px -4px 10px rgba(255, 255, 255, 0.9), inset 1px 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: linear-gradient(145deg, #E11D48, #BE123C);
+  box-shadow: 6px 6px 16px rgba(225, 29, 72, 0.45), -5px -5px 12px rgba(255, 255, 255, 1);
+}
+
+.btn-danger:active:not(:disabled) {
+  box-shadow: inset 3px 3px 6px rgba(159, 18, 57, 0.7), inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.btn-buy {
+  background: linear-gradient(145deg, #10B981, #059669);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 5px 5px 14px rgba(5, 150, 105, 0.38), -4px -4px 10px rgba(255, 255, 255, 0.9), inset 1px 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.btn-buy:hover:not(:disabled) {
+  background: linear-gradient(145deg, #059669, #047857);
+}
+
+.btn-buy:active:not(:disabled) {
+  box-shadow: inset 3px 3px 6px rgba(4, 120, 87, 0.7), inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.btn-sell {
+  background: linear-gradient(145deg, #F43F5E, #E11D48);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 5px 5px 14px rgba(225, 29, 72, 0.38), -4px -4px 10px rgba(255, 255, 255, 0.9), inset 1px 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.btn-sell:hover:not(:disabled) {
+  background: linear-gradient(145deg, #E11D48, #BE123C);
+}
+
+.btn-sell:active:not(:disabled) {
+  box-shadow: inset 3px 3px 6px rgba(159, 18, 57, 0.7), inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   Debossed Neumorphic Inputs & Form Controls (Sunken Wells)
+   ========================================================================== */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: var(--neu-base);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 14px;
+  border: 1px solid var(--border-main);
+  box-shadow: var(--neu-inset);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-input:focus, .form-select:focus {
+  outline: none;
+  box-shadow: var(--neu-inset), 0 0 0 2px rgba(5, 150, 105, 0.4);
+  border-color: rgba(5, 150, 105, 0.6);
+}
+
+.form-input::placeholder {
+  color: var(--text-light);
+}
+
+/* ==========================================================================
+   Neumorphic Badges & Status
+   ========================================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+  background: var(--neu-base);
+  box-shadow: var(--neu-raised-xs);
+  border: 1px solid var(--border-light);
+}
+
+.badge-positive, .badge-buy {
+  color: var(--color-buy);
+  box-shadow: var(--neu-raised-xs), inset 0 0 0 1px rgba(16, 185, 129, 0.35);
+}
+
+.badge-negative, .badge-sell {
+  color: var(--color-sell);
+  box-shadow: var(--neu-raised-xs), inset 0 0 0 1px rgba(244, 63, 94, 0.35);
+}
+
+.badge-warning, .badge-pending {
+  color: var(--color-warning);
+  box-shadow: var(--neu-raised-xs), inset 0 0 0 1px rgba(245, 158, 11, 0.35);
+}
+
+.badge-info {
+  color: var(--color-info);
+  box-shadow: var(--neu-raised-xs), inset 0 0 0 1px rgba(59, 130, 246, 0.35);
+}
+
+.badge-neutral {
+  color: var(--text-secondary);
+  box-shadow: var(--neu-raised-xs);
+}
+
+/* ==========================================================================
+   Neumorphic Financial Tables
+   ========================================================================== */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.financial-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.financial-table th {
+  padding: 14px 18px;
+  background-color: var(--neu-base-dark);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border-main);
+  white-space: nowrap;
+}
+
+.financial-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--border-main);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.financial-table tbody tr {
+  transition: all 0.15s ease;
+}
+
+.financial-table tbody tr:hover {
+  background-color: var(--neu-base-light);
+}
+
+.financial-table .numeric {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+}
+
+.text-positive {
+  color: var(--color-positive);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.text-negative {
+  color: var(--color-negative);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Neumorphic Floating Modal Sheet
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background: var(--neu-base);
+  border-radius: var(--radius-lg);
+  max-width: 520px;
+  width: 100%;
+  box-shadow: var(--neu-raised-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-header {
+  padding: 20px 26px;
+  border-bottom: 1px solid var(--border-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.modal-body {
+  padding: 26px;
+}
+
+.modal-footer {
+  padding: 18px 26px;
+  background-color: var(--neu-base-dark);
+  border-top: 1px solid var(--border-main);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Animations */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+/* Live Market Pulse & Price Flash Animations */
+@keyframes live-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7);
+  }
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 6px rgba(5, 150, 105, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
+  }
+}
+
+.live-pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-green);
+  border-radius: 50%;
+  display: inline-block;
+  animation: live-pulse 2s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary-green);
+  background: var(--neu-base);
+  box-shadow: var(--neu-raised-xs);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .glass-alert-success,
+:root.dark .glass-alert-success,
+html.dark .glass-alert-success {
+  color: #34D399;
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .glass-alert-danger,
+:root.dark .glass-alert-danger,
+html.dark .glass-alert-danger {
+  color: #FB7185;
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .glass-alert-warning,
+:root.dark .glass-alert-warning,
+html.dark .glass-alert-warning {
+  color: #FBBF24;
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .glass-alert-info,
+:root.dark .glass-alert-info,
+html.dark .glass-alert-info {
+  color: #60A5FA;
+}
+
+@keyframes price-flash-green {
+  0% {
+    background-color: rgba(5, 150, 105, 0.22);
+    color: var(--color-buy);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes price-flash-red {
+  0% {
+    background-color: rgba(225, 29, 72, 0.22);
+    color: var(--color-sell);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.flash-up {
+  animation: price-flash-green 1.2s ease-out;
+  border-radius: 4px;
+}
+
+.flash-down {
+  animation: price-flash-red 1.2s ease-out;
+  border-radius: 4px;
+}
+
+/* Responsive Utilities */
+@media (max-width: 960px) {
+  .metric-ribbon {
+    grid-template-columns: 1fr 1fr;
+  }
+  .metric-ribbon-item {
+    border-bottom: 1px solid var(--border-main);
+  }
+}
+
+@media (max-width: 640px) {
+  .metric-ribbon {
+    grid-template-columns: 1fr;
+  }
+  .page-title {
+    font-size: 22px;
+  }
+  .card {
+    padding: 18px;
+  }
+}
